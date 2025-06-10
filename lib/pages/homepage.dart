@@ -107,7 +107,6 @@ class _HomepageState extends State<Homepage> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: CustomScrollView(
           slivers: [
-            /// Search Field
             SliverToBoxAdapter(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,8 +144,6 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-
-            /// Category Selector
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 50,
@@ -199,8 +196,6 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
-
-            /// Recipe Cards or No Results
             displayedRecipes.isEmpty
                 ? SliverToBoxAdapter(
                   child: Padding(

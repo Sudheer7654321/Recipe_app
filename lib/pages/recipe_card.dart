@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:recipe_app/models/wishlist_manager.dart';
 
 class RecipeCard extends StatefulWidget {
   final String imagePath;
@@ -23,7 +24,13 @@ class RecipeCard extends StatefulWidget {
 }
 
 class _RecipeCardState extends State<RecipeCard> {
-  bool isFavorite = false;
+  late bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = WishlistManager().isInWishlist(widget.name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,12 +106,17 @@ class _RecipeCardState extends State<RecipeCard> {
                   onTap: () {
                     setState(() {
                       isFavorite = !isFavorite;
+                      WishlistManager().toggleWishlist({
+                        'name': widget.name,
+                        'imagePath': widget.imagePath,
+                        'duration': widget.duration,
+                      });
                     });
                   },
                   child: Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_border,
                     color: isFavorite ? Colors.red : Colors.white70,
-                    size: 16,
+                    size: 18,
                   ),
                 ),
               ),
